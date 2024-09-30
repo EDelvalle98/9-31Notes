@@ -1,1 +1,53 @@
-#placeholder
+Life and Death of an Object
+
+Object Creation:
+Using the new keyword: This is the primary way to create objects in Java. It allocates memory on the heap for the object and initializes its fields.
+Constructor calls: When an object is created, its constructor is automatically called to initialize its state.
+
+Object Destruction:
+Garbage Collection: Java's automatic memory management system. It identifies objects that are no longer reachable by the program and reclaims their memory.
+No explicit delete: Unlike languages like C++, Java doesn't require programmers to manually deallocate memory.
+
+Garbage Collector Behavior:
+Deterministic vs. Non-Deterministic: The garbage collector's timing is not predictable. It runs when it determines that memory is low or when the JVM is idle.
+Types of Collectors: There are different types of garbage collectors (e.g., serial, parallel, concurrent) with varying performance characteristics.
+
+Preventing Memory Leaks:
+Circular References: Be cautious of situations where objects reference each other cyclically, as this can prevent the garbage collector from reclaiming them.
+Global Variables: Avoid using global variables excessively, as they can make it difficult to determine when an object is no longer needed.
+
+Finalizers:
+Methods called before garbage collection: Finalizers are methods that are automatically called by the garbage collector before an object is reclaimed.
+Not a reliable mechanism: Finalizers should be used sparingly and primarily for cleanup tasks that are essential but cannot be performed deterministically.
+
+Example:
+
+Java
+public class Dog {
+    String name;
+    int age;
+
+    public Dog(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void bark() {
+        System.out.println("Woof!");   
+
+    }
+}
+
+public class   
+ Main {
+    public static void main(String[] args) {
+        Dog fido = new Dog("Fido", 5);
+        fido.bark();
+
+        // fido is no longer referenced, so it will be eligible for garbage collection
+    }
+}
+
+In this example, a Dog object is created using the new keyword. When the main method finishes, the fido reference becomes null, and the object is no longer reachable. The garbage collector can then reclaim the memory allocated to the Dog object.
+
+While Java's automatic memory management simplifies programming, understanding the principles of object creation, destruction, and garbage collection is essential for writing efficient and reliable code.
